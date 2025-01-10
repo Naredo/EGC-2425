@@ -126,16 +126,16 @@ def test_login_unsuccessful_vacios(test_client):
         "/login", data=dict(email="", password=""), follow_redirects=True
     )
 
-    assert response.request.path == url_for("auth.login"), "Login was unsuccessful"
+    assert response.request.path == url_for("auth.login"), "Login was empty"
 
     test_client.get("/logout", follow_redirects=True)
 
 def test_conteo_usuarios(test_client):
     
-    valor anterior = db.count
+    valor = db.count
     response = test_client.post(
         "/signup",
         data=dict(name="Foo", surname="Example", email="foo@example.com", password="foo1234"),
         follow_redirects=True,
     )
-    assert db.count = valor_anterior +1
+    assert db.count == valor +1
